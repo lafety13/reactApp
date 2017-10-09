@@ -9,7 +9,7 @@ import { BrowserRouter } from 'react-router-dom'
 // registerServiceWorker();
 
 ReactDOM.render(
-    <BrowserRouter>
+    <BrowserRouter >
         {/*<div>*/}
             {/*<ul>*/}
                 {/*<li><NavLink to="/products" activeClassName="active">Home</NavLink></li>*/}

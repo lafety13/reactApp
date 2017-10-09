@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-export class Product extends Component {
+class Product extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -10,9 +10,9 @@ export class Product extends Component {
 
     render() {
         return (
-            <li className={"list-group-item"}>
-                {this.props.product.name}
-            </li>
+            <li className="list-group-item">{this.props.product.name}</li>
         );
     }
 }
+
+export default Product
