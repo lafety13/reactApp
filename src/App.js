@@ -5,6 +5,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Pagination } from "react-bootstrap";
 import {Link, Route, Switch} from 'react-router-dom';
+import {ProductData} from './api/data';
 
 class App extends Component {
     constructor(props) {
@@ -23,27 +24,36 @@ class App extends Component {
             .then(response => this.setState({data: response.data.products}))
             .catch(err => console.log(err))
     }
-
-    onChangePage(page) {
-        this.setState({
-            activePage: page
-        });
-    }
-
-    updateSearch (event) {
-        this.setState({
-            activePage: 1,
-            search : event.target.value.substr(0, 20)
-        })
-    }
-
-    onClickCategory(event) {
-        this.setState({
-            categoryProduct: event.target.value
-        });
-    }
+    //
+    // onChangePage(page) {
+    //     this.setState({
+    //         activePage: page
+    //     });
+    // }
+    //
+    // updateSearch (event) {
+    //     this.setState({
+    //         activePage: 1,
+    //         search : event.target.value.substr(0, 20)
+    //     })
+    // }
+    //
+    // onClickCategory(event) {
+    //     this.setState({
+    //         categoryProduct: event.target.value
+    //     });
+    // }
 
     render() {
+        let category = this.state.data.map(product => product.bsr_category);
+        let uniqueCategory = function(category) {
+            let obj = {};
+            for (let i = 0; i < category.length; i++) {
+                let str = category[i];
+                obj[str] = true;
+            }
+            return Object.keys(obj);
+        }(category);
 
         // let filteredProduct = this.state.data.filter((product) => {
         //         return product.name.indexOf(this.state.search) !== -1
@@ -65,7 +75,8 @@ class App extends Component {
                 <div className="col-md-2">
                     <ul>
                         <li><Link to={this.props.match.url + "/all"} className="active">All</Link></li>
-                        <li><Link to={this.props.match.url + "/Amazon Launchpad/"} className="active">Amazon Launchpad</Link></li>
+                        {uniqueCategory.map(category => <li><Link to={this.props.match.url + "/" + category} className="active">{category   }</Link></li>)}
+                        {/*<li><Link to={this.props.match.url + "/Amazon Launchpad/"} className="active">Amazon Launchpad</Link></li>*/}
                     </ul>
 
                 </div>
