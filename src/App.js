@@ -11,6 +11,7 @@ class App extends Component {
         super(props);
         this.state = {
             data: [],
+
         };
     }
 
@@ -53,12 +54,12 @@ class App extends Component {
                 <Row>
                     <Col sm={2} md={2} xs={2}>
                         <ListGroup>
-                            <Link to={"/products/all"} className="list-group-item">All</Link>
+                            <Link to={"/products/all"} className="list-group-item active">All</Link>
                             {uniqueCategory.map((category, index) => <Link to={"/products/" + category} key={index} className="list-group-item">{category}</Link>)}
                         </ListGroup>
                     </Col>
 
-                    <Col md={8}>
+                    <Col md={10}>
                         <Route exact path="/" render={() => <Redirect to="/products/all"/>}/>
                         <Route path='/products/:level' render={({match}) => (
                             <ProductList match={match} data={this.state.data}/>

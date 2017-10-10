@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, Thumbnail, Col, Row } from 'react-bootstrap';
+import { Button, Thumbnail, Col, Row, Grid } from 'react-bootstrap';
 import {Panel} from 'react-bootstrap'
 
 class Product extends Component {
@@ -12,29 +12,23 @@ class Product extends Component {
 
     render() {
         let product = this.props.product;
+        const header = <a href={product.link}> {product.name}</a>;
         return (
-                <Row>
-                    <Col>
-                        <Thumbnail src={product.img} alt="242x200">
-                            <h3><a href={product.link}> {product.name}</a></h3>
-                            <Button onClick={ ()=> this.setState({ open: !this.state.open })} bsStyle="default">
-                                Additional information
-                            </Button>
-                            <Panel collapsible expanded={this.state.open}>
-                                <span>Asin: {product.asin}</span><br/>
-                                <span>Category: {product.bsr_category}</span>
-                            </Panel>
-                            <p>Price: {product.price}</p>
-                            <p>
-                                <Button href={product.link} bsStyle="primary">Button</Button>
-                            </p>
-                        </Thumbnail>
-                    </Col>
-                </Row>
-
-
-
-
+            <Panel header={header}>
+                <Thumbnail src={product.img} alt={product.name}>
+                     <Button onClick={ ()=> this.setState({ open: !this.state.open })} bsStyle="default">
+                         Additional information
+                     </Button>
+                     <Panel collapsible expanded={this.state.open}>
+                         <span>Asin: {product.asin}</span><br/>
+                        <span>Category: {product.bsr_category}</span>
+                     </Panel>
+                     <p>Price: {product.price}</p>
+                     <p>
+                        <Button href={product.link} bsStyle="primary">Button</Button>
+                     </p>
+                 </Thumbnail>
+            </Panel>
         );
     }
 }

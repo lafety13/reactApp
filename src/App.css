@@ -30,3 +30,12 @@
 
 
 
+
+.fixed-side-column {
+  background:red;
+  width:250px;
+}
+.fluid-middle-column {
+  background:black;
+  flex-grow: 1;
+}
