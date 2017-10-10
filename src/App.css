@@ -27,15 +27,25 @@
   to { transform: rotate(360deg); }
 }
 
-
-
-
-
-.fixed-side-column {
-  background:red;
-  width:250px;
+.m-bot {
+  margin-bottom: 15px;
 }
-.fluid-middle-column {
-  background:black;
-  flex-grow: 1;
+
+.navbar,
+.navbar-default {
+  background-image: linear-gradient(to bottom,#337ab7 0,#2b669a 100%) !important;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: white;
+}
+
+.navbar-default .navbar-brand {
+  color: white;
+}
+
+.navbar-default{
+  color: white;
+  border-color: white;
+  border-radius: 10px;
 }

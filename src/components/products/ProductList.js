@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Pagination } from "react-bootstrap";
 import Product from './Product';
 import { FormControl} from 'react-bootstrap';
+import '../../App.css';
 
 class ProductList extends Component {
     constructor(props) {
@@ -47,10 +48,10 @@ class ProductList extends Component {
         return (
             <div>
                 <FormControl
+                    bsClass="form-control m-bot"
                     value = {this.state.search}
                     onChange = {this.updateSearch.bind(this)}
                     type="text" placeholder="Write something to search for" />
-
 
                     {filteredData.map((product, index) => {
                         if (index >= startOffset && startCount < this.state.perPage) {
