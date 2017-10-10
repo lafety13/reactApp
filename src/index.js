@@ -16,7 +16,7 @@ ReactDOM.render(
             {/*</ul>*/}
 
             {/*<Switch>*/}
-                {/*<Route path="/products" component={App} > </Route>*/}
+                {/*<Route path="/" component={App} > </Route>*/}
             {/*</Switch>*/}
         {/*</div>*/}
         <App/>

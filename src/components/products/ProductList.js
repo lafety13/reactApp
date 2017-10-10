@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import { Pagination } from "react-bootstrap";
-import axios from 'axios';
-import Input from './Input';
 import Product from './Product';
+import { FormControl} from 'react-bootstrap';
 
 class ProductList extends Component {
     constructor(props) {
@@ -11,6 +10,7 @@ class ProductList extends Component {
             pageOfItems: [],
             search : '',
             activePage: 1,
+            perPage: 10
         };
     }
 
@@ -27,31 +27,33 @@ class ProductList extends Component {
         })
     }
 
-    render() {
+    _filterProductList() {
         let params = this.props.match.params;
-
-        let filteredData = this.props.data
+        return this.props.data
             .filter(product => product.name.indexOf(this.state.search) !== -1)
             .filter(product => {
                 if (params.level === 'all') return true;
                 return product.bsr_category === this.props.match.params.level
             });
+    }
 
+    render() {
+        let filteredData =  this._filterProductList();
         const page = this.state.activePage;
-        const perPage = 10;
-        const pages = Math.ceil(filteredData.length / perPage);
-        const startOffset = (page - 1) * perPage;
+        const pages = Math.ceil(filteredData.length / this.state.perPage);
+        const startOffset = (page - 1) * this.state.perPage;
         let startCount = 0;
 
         return (
-            <div className="col-md-8">
-                <Input
+            <div>
+                <FormControl
                     value = {this.state.search}
-                    onChange = {this.updateSearch.bind(this)}/>
+                    onChange = {this.updateSearch.bind(this)}
+                    type="text" placeholder="Write something to search for" />
 
-                <ul className="list-group">
+
                     {filteredData.map((product, index) => {
-                        if (index >= startOffset && startCount < perPage) {
+                        if (index >= startOffset && startCount < this.state.perPage) {
                             startCount++;
                             return (
                                 <Product key={index} product={product}/>
@@ -59,7 +61,7 @@ class ProductList extends Component {
                         }
                         return true;
                     })}
-                </ul>
+
 
                 <Pagination className="users-pagination pull-right" bsSize="medium" maxButtons={10} first last next
                             prev boundaryLinks items={pages} activePage={page} onSelect={this.onChangePage.bind(this)}/>
